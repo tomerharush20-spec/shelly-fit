@@ -1,15 +1,16 @@
-# שלי פיט · Shelly Fit
+# Shelly Fit
 
-**הכושר שלי.** אפליקציית כושר וספורט בעברית: תוכנית אישית משאלון מטרות, יומן אימונים, 110 תרגילים בתלת-ממד עם הסבר טכניקה, טבלת אימונים שנתית ויעדים.
+**My fitness.** A fitness and sports app: a personal plan from a goals questionnaire, a workout log, 110 exercises in 3D with technique cues, a year-long training grid, and goals.
 
-## מה יש באפליקציה
-- הרשמה חד פעמית (שם וטלפון, בלי אימות) ושאלון מטרות שבונה תוכנית
-- רישום סטים וחזרות עם כפתורי +/−, טיימר מנוחה וסופר-סטים
-- אימון ממוקד לשתי קבוצות שריר, עם המלצה על הצמד שהכי מזמן לא אומן
-- בדיקת תוכנית כל 4 שבועות עם הצעות להעלאת עומס או החלפת תרגילים
-- יעד שבועי לכל סוג אימון, מטרות פיזיות ומדדי גוף
-- נפח סטים לכל קבוצת שריר וטבלת אימונים שנתית צבועה לפי סוג אימון
+## Features
+- One-time sign-up (username and phone, no verification) followed by a goals questionnaire that builds your plan
+- Log sets and reps with +/− buttons, rest timer, supersets
+- Focused workouts for two muscle groups, with a recommendation for the pair you trained least recently
+- Program review every 4 weeks with suggestions to add load or swap exercises
+- Weekly goals per training type, physical goals and body measurements
+- Weekly sets per muscle group and a year grid colored by workout type
+- Installs on your phone (home-screen icon, works offline after the first visit)
 
-## הפעלה
-קובץ אחד: `index.html`. פותחים בדפדפן, או מפרסמים ב-GitHub Pages.
-הנתונים נשמרים בדפדפן של כל משתמש (localStorage).
+## Run it
+Single file: `index.html`. Open it in a browser or deploy it to any static host.
+Data is stored in each user's own browser (localStorage).

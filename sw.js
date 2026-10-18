@@ -1,5 +1,5 @@
-// שלי פיט · service worker: the app opens offline after the first visit
-const VERSION = 'shelly-fit-v1';
+// Shelly Fit service worker: the app opens offline after the first visit
+const VERSION = 'shelly-fit-v2';
 const CORE = ['./', './index.html', './manifest.webmanifest', './icons/icon-192.png', './icons/icon-512.png', './icons/apple-touch-icon.png'];
 self.addEventListener('install', e => {
   e.waitUntil(caches.open(VERSION).then(c => c.addAll(CORE)).then(() => self.skipWaiting()));
