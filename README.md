@@ -14,7 +14,7 @@
 ## Run it
 - **Website:** single file `index.html`. Live on GitHub Pages: https://tomerharush20-spec.github.io/shelly-fit/
 - **Phone (no store):** open the website and choose *Add to Home Screen*.
-- **Android app:** every push to `main` builds an APK automatically (Actions → *Build Android app* → artifact `shelly-fit-android-apk`). Download it on an Android phone and install (allow *Install unknown apps*).
+- **Android app:** every push to `main` builds an APK automatically and publishes it as the latest release. On an Android phone open https://github.com/tomerharush20-spec/shelly-fit/releases/latest/download/shelly-fit.apk and install it (allow *Install unknown apps*).
 
 Data is stored on each user's own device (localStorage).
 

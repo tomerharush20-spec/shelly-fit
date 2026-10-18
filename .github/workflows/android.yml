@@ -6,7 +6,7 @@ on:
   workflow_dispatch:
 
 permissions:
-  contents: read
+  contents: write
 
 jobs:
   apk:
@@ -44,3 +44,14 @@ jobs:
           name: shelly-fit-android-apk
           path: android/app/build/outputs/apk/debug/app-debug.apk
           retention-days: 30
+
+      - name: Publish APK as the latest release
+        if: github.event_name == 'push' || github.event_name == 'workflow_dispatch'
+        env:
+          GH_TOKEN: ${{ github.token }}
+        run: |
+          cp android/app/build/outputs/apk/debug/app-debug.apk shelly-fit.apk
+          gh release create "v1.0.${{ github.run_number }}" shelly-fit.apk \
+            --title "Shelly Fit 1.0.${{ github.run_number }}" \
+            --notes "Android test build. Download shelly-fit.apk on your phone and install it (allow installing unknown apps)." \
+            --latest
