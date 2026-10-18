@@ -3,8 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="description" content="שלי פיט: הכושר שלי. תוכנית אימונים אישית, יומן אימונים, 110 תרגילים בתלת-ממד ויעדים.">
 <meta name="theme-color" content="#C4472F">
-<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/png" sizes="32x32" href="icons/favicon-32.png">
+<link rel="apple-touch-icon" href="icons/apple-touch-icon.png">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="שלי פיט">
+<meta name="apple-mobile-web-app-status-bar-style" content="default">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}
+.installbar{position:fixed;inset-inline:12px;bottom:calc(var(--navh) + 12px + env(safe-area-inset-bottom,0px));z-index:60;max-width:520px;margin:0 auto;background:var(--surface);border:1px solid var(--line);border-radius:16px;box-shadow:0 8px 28px rgba(0,0,0,.18);padding:10px 12px;display:flex;align-items:center;gap:10px}
+.installbar img{width:44px;height:44px;border-radius:11px;flex:none}
+.installbar .t{flex:1;min-width:0;display:grid;gap:1px}
+.installbar .t span{font-size:.84rem;color:var(--muted)}
+.installbar .shr{display:inline-block;font-weight:800;color:var(--lane)}</style>
 <title>שלי פיט</title>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <script src="https://cdnjs.cloudflare.com/ajax/libs/three.js/r128/three.min.js"></script>
@@ -391,7 +404,6 @@ footer{margin-top:24px;font-size:.8rem;color:var(--muted);max-width:70ch}
 <div id="sheet" class="sheet" hidden dir="rtl"><div class="pnl" id="sheetPnl" role="dialog" aria-modal="true"></div></div>
 <div id="toast" class="toast" hidden role="status"></div>
 <div id="onb" class="onb" dir="rtl" lang="he" hidden><div class="onb-in" id="onbIn" role="dialog" aria-modal="true" aria-label="הרשמה"></div></div>
-
 <script>
 (function(){
 'use strict';
@@ -2651,6 +2663,33 @@ if(!S.user)showOnb('splash');
 Promise.race([Cloud.init(),new Promise(r=>setTimeout(r,3500))]).then(userGate,userGate);
 
 })();
+</script>
+<script>
+/* =========================================================
+   Install as a phone app (site build only)
+   ========================================================= */
+(function(){
+  const standalone=matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
+  if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost')){
+    window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(e=>console.warn('sw',e))})}
+  if(standalone)return;
+  let dismissed=false;try{dismissed=localStorage.getItem('shellyfit.installDismissed')==='1'}catch(e){}
+  if(dismissed)return;
+  const bar=document.createElement('div');bar.className='installbar';bar.dir='rtl';bar.hidden=true;document.body.appendChild(bar);
+  const close=()=>{bar.hidden=true;try{localStorage.setItem('shellyfit.installDismissed','1')}catch(e){}};
+  let deferred=null;
+  window.addEventListener('beforeinstallprompt',e=>{e.preventDefault();deferred=e;
+    bar.innerHTML=`<img src="icons/icon-192.png" alt=""><div class="t"><b>התקן את שלי פיט</b><span>אייקון במסך הבית, נפתח בלי דפדפן</span></div><button class="btn sm" id="instGo">התקן</button><button class="ibtn" id="instX" aria-label="סגור">✕</button>`;
+    bar.hidden=false;
+    bar.querySelector('#instGo').onclick=async()=>{bar.hidden=true;deferred.prompt();try{await deferred.userChoice}catch(_){}deferred=null};
+    bar.querySelector('#instX').onclick=close});
+  window.addEventListener('appinstalled',()=>{bar.hidden=true;close()});
+  const iOS=/iphone|ipad|ipod/i.test(navigator.userAgent)&&!window.MSStream;
+  if(iOS){setTimeout(()=>{if(!bar.hidden)return;
+    bar.innerHTML=`<img src="icons/icon-192.png" alt=""><div class="t"><b>הוסף את שלי פיט למסך הבית</b><span>לחץ על <span class="shr" aria-label="שיתוף">⎋</span> שיתוף ואז "הוסף למסך הבית"</span></div><button class="ibtn" id="instX" aria-label="סגור">✕</button>`;
+    bar.hidden=false;bar.querySelector('#instX').onclick=close},4000)}
+})();
+
 </script>
 </body>
 </html>
