@@ -1,0 +1,8 @@
+{
+  "appId": "com.shellyfit.app",
+  "appName": "Shelly Fit",
+  "webDir": "www",
+  "backgroundColor": "#F6F7F4",
+  "android": { "allowMixedContent": false },
+  "ios": { "contentInset": "always" }
+}

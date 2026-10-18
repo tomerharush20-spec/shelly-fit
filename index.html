@@ -2669,6 +2669,7 @@ Promise.race([Cloud.init(),new Promise(r=>setTimeout(r,3500))]).then(userGate,us
    Install as a phone app (site build only)
    ========================================================= */
 (function(){
+  if(window.Capacitor&&window.Capacitor.isNativePlatform&&window.Capacitor.isNativePlatform())return; // native app: no service worker, no install banner
   const standalone=matchMedia('(display-mode: standalone)').matches||navigator.standalone===true;
   if('serviceWorker' in navigator&&(location.protocol==='https:'||location.hostname==='localhost')){
     window.addEventListener('load',()=>{navigator.serviceWorker.register('sw.js').catch(e=>console.warn('sw',e))})}

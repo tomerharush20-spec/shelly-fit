@@ -12,5 +12,32 @@
 - Installs on your phone (home-screen icon, works offline after the first visit)
 
 ## Run it
-Single file: `index.html`. Open it in a browser or deploy it to any static host.
-Data is stored in each user's own browser (localStorage).
+- **Website:** single file `index.html`. Live on GitHub Pages: https://tomerharush20-spec.github.io/shelly-fit/
+- **Phone (no store):** open the website and choose *Add to Home Screen*.
+- **Android app:** every push to `main` builds an APK automatically (Actions → *Build Android app* → artifact `shelly-fit-android-apk`). Download it on an Android phone and install (allow *Install unknown apps*).
+
+Data is stored on each user's own device (localStorage).
+
+## Native app (Capacitor)
+The same `index.html` runs inside a native shell with [Capacitor](https://capacitorjs.com). The 3D library is bundled so the app works fully offline.
+
+```bash
+npm install
+npm run sync        # builds www/ and syncs Android/iOS
+npm run android     # opens Android Studio
+```
+
+- App id: `com.shellyfit.app` · name: **Shelly Fit**
+- Icons and splash screens are generated from `assets/` with `npm run assets`.
+
+### iOS
+Requires a Mac with Xcode and an Apple Developer account ($99/year):
+```bash
+npx cap add ios
+npx capacitor-assets generate --ios
+npm run ios
+```
+
+### Publishing to the stores
+- **Google Play:** create a Play Console account ($25 one-time), create an upload keystore, then build a signed release bundle (`./gradlew bundleRelease`) and upload the `.aab`.
+- **App Store:** archive in Xcode and upload through App Store Connect.

@@ -1,0 +1,23 @@
+{
+  "name": "shelly-fit",
+  "version": "1.0.0",
+  "private": true,
+  "description": "Shelly Fit: fitness and sports app (web + Android/iOS via Capacitor)",
+  "scripts": {
+    "build:web": "node scripts/build-web.mjs",
+    "assets": "capacitor-assets generate --android --iconBackgroundColor '#C4472F' --splashBackgroundColor '#F6F7F4' --splashBackgroundColorDark '#101513'",
+    "sync": "npm run build:web && cap sync",
+    "android": "npm run sync && cap open android",
+    "ios": "npm run sync && cap open ios"
+  },
+  "dependencies": {
+    "@capacitor/android": "6.2.1",
+    "@capacitor/core": "6.2.1",
+    "@capacitor/ios": "6.2.1",
+    "three": "0.128.0"
+  },
+  "devDependencies": {
+    "@capacitor/assets": "3.0.5",
+    "@capacitor/cli": "6.2.1"
+  }
+}
